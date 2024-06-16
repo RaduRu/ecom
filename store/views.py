@@ -13,3 +13,8 @@ def checkout(request):
     context = {}
     return render (request, 'store/checkout.html', context)
 
+def category(request):
+    context = {}
+    return render (request, 'store/category.html', context)
+
+
