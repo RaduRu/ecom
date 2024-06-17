@@ -18,7 +18,7 @@ crossorigin="anonymous">
 
 <script type="text/javascript">
   var user = '{{request.user}}'
-  
+
   function getToken(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -73,7 +73,7 @@ const csrftoken = getToken('csrftoken');
             <a href="{% url 'cart' %}">
                <img  id="cart-icon" src="{% static 'images/cart.png' %}">
            </a>
-           <p id="cart-total">0</p>
+           <p id="cart-total">{{cartItems}}</p>
 
        </div>
         </div>
