@@ -3,7 +3,7 @@ from .models import *
 from django.http import JsonResponse
 import json 
 import datetime
-from . utils import cookieCart, cartData
+from . utils import cookieCart, cartData, guestOrder
 
 def store(request):
 
@@ -76,14 +76,20 @@ def processOrder(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer = customer , complete = False)
-        total = float(data['form']['total'])
-        order.transaction_id = transaction_id
+        
+        
+    else:
+        customer, order = guestOrder(request, data) 
+        
 
-        if total == order.get_cart_tot:
-            order.complete = True
-        order.save()    
+    total = float(data['form']['total'])
+    order.transaction_id = transaction_id
 
-        if order.shipping == True:
+    if total == order.get_cart_tot:
+        order.complete = True
+    order.save()       
+
+    if order.shipping == True:
             ShippingAddress.objects.create(
                 customer = customer,
                 order = order,
@@ -91,7 +97,8 @@ def processOrder(request):
                 city = data['shipping']['city'],
                 state = data['shipping']['state'],
                 zipcode = data['shipping']['zipcode'],
-            )
-    else:
-        print('!!! User is not logged in...')    
+            )        
+            
+        
+
     return JsonResponse('Payment completed!!!', safe = False)
