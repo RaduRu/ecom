@@ -1,0 +1,45 @@
+{% extends 'store/main.html' %}
+ 
+ 
+{% load static %}
+{% static "images" as baseUrl %}
+
+{% block content %}
+
+<br/><br/>
+<br/><br/>
+<br/><br/> 
+
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-6" style="background-color: #a6c8ff; /* Light blue background */ border-radius: 10px; padding: 20px; text-align: center;">
+                <h3 style="font-size: 1.5rem; font-weight: bold; margin-top: 10px; margin-bottom: 10px;">Enter your info to LogIn</h3>
+            </div>
+        </div>
+    </div>
+    <!-- Main content -->
+    <br/>
+    <div class="col-md-6 offset-md-3">
+        <form method ="POST" action="{% url 'login' %}">
+            
+            <div class="mb-3">
+                
+                <input type="text" class="form-control" name="username" placeholder="Enter your username">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" name="password" placeholder="Enter your password">
+            </div>
+        
+            <button   class="col-md-6 offset-md-3" type="submit" class="btn btn-secondary">LogIn</button>
+        </form>
+    </div>
+
+</body>
+<br/><br/>
+<br/><br/> 
+
+
+
+{% endblock content %}

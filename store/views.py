@@ -4,6 +4,8 @@ from django.http import JsonResponse
 import json 
 import datetime
 from . utils import cookieCart, cartData, guestOrder
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages 
 
 def store(request):
 
@@ -34,10 +36,10 @@ def checkout(request):
     context = {'items' : items, 'order': order, 'cartItems': cartItems}
     return render (request, 'store/checkout.html', context)
 
-def category(request):
-    context = {}
-    return render (request, 'store/category.html', context)
-
+def category(request, foo):
+    category = Category.objects.get(name = foo)
+    products = Product.objects.filter(category = category)
+    return render(request, "category.html", {'products': products, 'category': category})
 
 
 def updateItem(request):
@@ -102,3 +104,14 @@ def processOrder(request):
         
 
     return JsonResponse('Payment completed!!!', safe = False)
+
+
+def about(request):
+    return render (request, 'about.html',  {})
+
+def login_user(request):
+    return render (request, 'login.html',  {})
+
+def logout_user(request):
+    pass
+
