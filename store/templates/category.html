@@ -1,0 +1,29 @@
+{% extends 'store/main.html' %}
+
+ 
+ 
+{% load static %}
+{% static "images" as baseUrl %}
+
+{% block content %}
+<div class="row">
+   {% for product in products %}
+   <div class="col-lg-4 mb-4">
+      <div class="border rounded p-3">
+         <img class="img-fluid mx-auto d-block" src="{{ product.imageURL }}" style="height: 300px; object-fit: cover; object-position: center;">
+         <div class="box-element product">
+            <h6 class="mt-3 text-center"><strong>{{ product.name }}</strong></h6>
+            <hr>
+            <div class="text-center">
+               <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+               <a class="btn btn-outline-success" href="#">View</a>
+            </div>
+            <h4 class="mt-3 text-center"><strong>{{ product.price|floatformat:2 }}$</strong></h4>
+         </div>
+      </div>
+   </div>
+   {% endfor %}
+</div>
+
+
+{% endblock content %}

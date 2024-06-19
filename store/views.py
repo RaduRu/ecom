@@ -46,11 +46,6 @@ def checkout(request):
     context = {'items' : items, 'order': order, 'cartItems': cartItems}
     return render (request, 'store/checkout.html', context)
 
-def category(request, foo):
-    category = Category.objects.get(name = foo)
-    products = Product.objects.filter(category = category)
-    return render(request, "category.html", {'products': products, 'category': category})
-
 
 def updateItem(request):
     data = json.loads(request.body)
@@ -161,6 +156,21 @@ def register_user(request):
                 return redirect ('register')
             
         return render( request, 'register.html', {'form': form})    
+    
+
+
+def category(request, foo):
+        data = cartData(request)
+        cartItems = data['cartItems']
+        try:
+            category = Category.objects.get(name=foo)
+            products = Product.objects.filter(category = category )
+            return render (request, 'category.html', {'products': products, 'category': category, 'cartItems': cartItems })
+
+        except:
+            messages.success(request, ("That category doesnt exist "))
+            return redirect('store')
+    
 
                 
 
