@@ -6,6 +6,13 @@ import datetime
 from . utils import cookieCart, cartData, guestOrder
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages 
+from django.contrib.auth.models import User 
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomerUserCreationForm
+from django import forms 
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
 
 
 
@@ -133,5 +140,32 @@ def logout_user(request):
     logout(request)
     messages.success(request, ("You have been logged out.. :( "))
     return redirect ('store')
+
+
+
+def register_user(request):
+    if request.user.is_authenticated:
+        return redirect ('store')
+    else:
+        form = CustomerUserCreationForm()
+
+        if request.method == 'POST':
+            form = CustomerUserCreationForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                Customer.objects.create(user=user, name = user.first_name, email = user.email)
+                messages.success(request, ' Account created ')
+                return redirect ('login')
+            else:
+                messages.success(request, ' something went wrong ')
+                return redirect ('register')
+            
+        return render( request, 'register.html', {'form': form})    
+
+                
+
+   
+
+
 
 

@@ -1,0 +1,25 @@
+{% extends 'store/main.html' %}
+ 
+ 
+{% load static %}
+{% static "images" as baseUrl %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <center>
+            <div class="col-8">
+                <form method="POST" action="">
+                    {% csrf_token %}
+
+                    {{ form }}
+                    <br/><br/>
+                    <br/><br/>
+                    <button type="submit" class="btn btn-secondary"> Register </button>
+
+                </form>
+            </div>
+        </center>
+    </div>
+</div>
+{% endblock content %}
