@@ -125,6 +125,9 @@ STATICFILES_DIRS = [
 MEDIA_URL= "/images/"
 MEDIA_ROOT=os.path.join(BASE_DIR, "static/images")
 
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
