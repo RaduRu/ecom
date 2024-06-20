@@ -171,6 +171,12 @@ def category(request, foo):
             messages.success(request, ("That category doesnt exist "))
             return redirect('store')
     
+def product(request, pk):
+    data = cartData(request) 
+    cartItems = data['cartItems']
+    product = Product.objects.get(id = pk)   
+    return render (request, 'product.html', {'product': product, 'category': category, 'cartItems': cartItems })
+
 
                 
 
