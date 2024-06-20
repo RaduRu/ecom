@@ -12,6 +12,7 @@ from .forms import CustomerUserCreationForm
 from django import forms 
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+from django.views.decorators.csrf import csrf_protect
 
 
 
@@ -114,6 +115,8 @@ def processOrder(request):
 def about(request):
     return render (request, 'about.html',  {})
 
+
+@csrf_protect
 def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
