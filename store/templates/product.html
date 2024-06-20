@@ -1,0 +1,32 @@
+{% extends 'store/main.html' %}
+ 
+ 
+{% load static %}
+{% static "images" as baseUrl %}
+
+{% block content %}
+<div class=" container ">
+    <br/>
+    <div class="card mb-3" ">
+        <div class="row g-0">
+        <div class="col-md-4">
+            <img src="{{ product.imageURL }}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            
+            <div class="card-body">
+            <center>
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">{{product.description}}</p>
+            <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+            <a class="btn btn-outline-success" href="{% url 'store' %}">Continue Shopping</a>
+           
+            
+
+            </center>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>    
+{% endblock content %}
