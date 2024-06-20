@@ -12,7 +12,7 @@ from .forms import CustomerUserCreationForm
 from django import forms 
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -36,7 +36,7 @@ def cart(request):
     context = {'items' : items, 'order': order, 'cartItems': cartItems}
     return render (request, 'store/cart.html', context)
 
-
+@csrf_exempt
 def checkout(request):
     
     data = cartData(request)
@@ -116,7 +116,7 @@ def about(request):
     return render (request, 'about.html',  {})
 
 
-@csrf_protect
+@csrf_exempt
 def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -140,7 +140,7 @@ def logout_user(request):
     return redirect ('store')
 
 
-
+@csrf_exempt
 def register_user(request):
     if request.user.is_authenticated:
         return redirect ('store')
