@@ -1,5 +1,5 @@
 My E-commerce - README
-My E-commerce
+
 
 My E-commerce is a web-based e-commerce platform designed to provide a seamless online shopping experience. 
 This application allows users to browse various products, add them to their cart, and make purchases securely.
